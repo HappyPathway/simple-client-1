@@ -1,7 +1,7 @@
 # Required
 variable "ssh_key_data" {
   description = "Contents of the private key"
-  default     = "${file(~/.ssh/ehron)}"
+  default     = "${file("~/.ssh/ehron")}"
 }
 
 variable "ssh_user" {
