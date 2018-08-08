@@ -11,6 +11,12 @@ resource aws_instance "webclient" {
     iam_instance_profile        = "${aws_iam_instance_profile.consul_client_iam_profile.name}"
     
     tags = "${merge(var.hashi_tags, map("Name", "${var.project_name}-webclient-server-${count.index}"), map("role", "webclient-server"), map("consul-cluster-name", replace("consul-cluster-${var.project_name}-${var.hashi_tags["owner"]}", " ", "")))}"
+    depends_on = [
+        "aws_instance.consul",
+        "aws_instance.mongo",
+        "aws_instance.listing-api",
+        "aws_instance.product-api"
+    ]
 }
 
 output "webclient_servers" {
